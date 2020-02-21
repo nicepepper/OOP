@@ -13,24 +13,64 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="test-data">
+      <UniqueIdentifier>{d48ee208-a5fd-4e8f-ba77-a56ececa239d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Replace.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ReplaceSubstringsInTextFile.cpp">
+    <ClCompile Include="InputParams.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="InputParams.cpp">
+    <ClCompile Include="CopyFileWithReplace.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ReplaceSubstringsInTextFile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="InputParams.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CopyFileWithReplace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="tests.bat">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="fox.txt">
+      <Filter>test-data</Filter>
+    </Text>
+    <Text Include="fox-replace-dog-with-cat.txt">
+      <Filter>test-data</Filter>
+    </Text>
+    <Text Include="Empty.txt">
+      <Filter>test-data</Filter>
+    </Text>
+    <Text Include="Empty-output.txt">
+      <Filter>test-data</Filter>
+    </Text>
+    <Text Include="numbers.txt">
+      <Filter>test-data</Filter>
+    </Text>
+    <Text Include="numbers-output.txt">
+      <Filter>test-data</Filter>
+    </Text>
+    <Text Include="mom.txt">
+      <Filter>test-data</Filter>
+    </Text>
+    <Text Include="mom-output.txt">
+      <Filter>test-data</Filter>
+    </Text>
+    <Text Include="uppercase.txt">
+      <Filter>test-data</Filter>
+    </Text>
+    <Text Include="uppercase-output.txt">
+      <Filter>test-data</Filter>
+    </Text>
   </ItemGroup>
 </Project>

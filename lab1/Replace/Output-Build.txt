@@ -1,0 +1,17 @@
+1>------ Rebuild All started: Project: Replace, Configuration: Release x64 ------
+1>InputParams.cpp
+1>Replace.cpp
+1>CopyFileWithReplace.cpp
+1>Generating code
+1>Previous IPDB not found, fall back to full compilation.
+1>All 227 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+1>Finished generating code
+1>Replace.vcxproj -> C:\IPS-2020\labs\oop\lab1\Replace\x64\Release\Replace.exe
+1>"€??@echo" не €вл€етс€ внутренней или внешней
+1>командой, исполн€емой программой или пакетным файлом.
+1>Test 1-Empty passed
+1>Test 2-fox passed
+1>Test 3-numbers passed
+1>Test 4-mom passed
+1>All tests passed successfuly
+========== Rebuild All: 1 succeeded, 0 failed, 0 skipped ==========

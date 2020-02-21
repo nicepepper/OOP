@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{77A3499F-C407-467B-89B1-1397F8475458}</ProjectGuid>
+    <ProjectGuid>{3D123690-2D16-45CB-AE53-D55F6586B270}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Replace</RootNamespace>
+    <RootNamespace>CopyFile</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -97,7 +97,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>"$(ProjectDir)tests.bat" "$(TargetPath)"</Command>
+      <Command>"$(ProjectDir)Tests.bat" "$(TargetPath)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -115,7 +115,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>"$(ProjectDir)tests.bat" "$(TargetPath)"</Command>
+      <Command>"$(ProjectDir)Tests.bat" "$(TargetPath)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -137,7 +137,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>"$(ProjectDir)tests.bat" "$(TargetPath)"</Command>
+      <Command>"$(ProjectDir)Tests.bat" "$(TargetPath)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -159,32 +159,19 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>"$(ProjectDir)tests.bat" "$(TargetPath)"</Command>
+      <Command>"$(ProjectDir)Tests.bat" "$(TargetPath)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="InputParams.cpp" />
-    <ClCompile Include="Replace.cpp" />
-    <ClCompile Include="CopyFileWithReplace.cpp" />
+    <ClCompile Include="CopyFile.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="InputParams.h" />
-    <ClInclude Include="CopyFileWithReplace.h" />
+    <Text Include="Empty.txt" />
+    <Text Include="input.txt" />
+    <Text Include="NonEmptyFile.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="tests.bat" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Empty-output.txt" />
-    <Text Include="Empty.txt" />
-    <Text Include="fox-replace-dog-with-cat.txt" />
-    <Text Include="fox.txt" />
-    <Text Include="mom-output.txt" />
-    <Text Include="mom.txt" />
-    <Text Include="numbers-output.txt" />
-    <Text Include="numbers.txt" />
-    <Text Include="uppercase-output.txt" />
-    <Text Include="uppercase.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

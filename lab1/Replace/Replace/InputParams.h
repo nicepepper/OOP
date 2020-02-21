@@ -1,8 +1,8 @@
-#pragma once
-#include <string>
+﻿#pragma once
 #include <optional>
+#include <string>
 
-struct AppParams
+struct Args
 {
 	std::string inputFileName;
 	std::string outputFileName;
@@ -10,4 +10,4 @@ struct AppParams
 	std::string replaceString;
 };
 
-std::optional<AppParams> ParseCommandLine(int size, char* arguments[]);
+std::optional<Args> ParseArgs(int argc, char* argv[]);
