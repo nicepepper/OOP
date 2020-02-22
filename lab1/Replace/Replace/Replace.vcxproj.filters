@@ -18,13 +18,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Replace.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="InputParams.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CopyFileWithReplace.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Replace.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
