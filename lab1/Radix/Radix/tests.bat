@@ -5,9 +5,9 @@ SET PROGRAM="%~1"
 SET OUT="%TEMP%\out.txt"
 
 REM 234(8) = 156(10)
-%PROGRAM% 8 10 234   > %OUT%
+%PROGRAM% "8" "10" "234" > %OUT%
 fc Test1.txt %OUT% > nul || goto err
-
+echo Test 1 passed
 
 
 
