@@ -10,9 +10,6 @@ fc Test1.txt %OUT% > nul || goto err
 echo Test 1 passed
 
 
-
-
-
 REM I successfully tested the tests
 echo All tests passed successfuly
 exit /B 0

@@ -24,6 +24,12 @@
     <ClCompile Include="InputParams.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="inputValidator.h.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ConversionOfStringsAndNumbers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="tests.bat">
@@ -37,6 +43,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputParams.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantsAndSourceData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="inputValidator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConversionOfStringsAndNumbers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
