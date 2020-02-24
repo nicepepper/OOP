@@ -40,6 +40,24 @@
     <Text Include="Test1.txt">
       <Filter>tests-data</Filter>
     </Text>
+    <Text Include="Test4.txt">
+      <Filter>tests-data</Filter>
+    </Text>
+    <Text Include="Test6.txt">
+      <Filter>tests-data</Filter>
+    </Text>
+    <Text Include="Test8.txt">
+      <Filter>tests-data</Filter>
+    </Text>
+    <Text Include="Test10.txt">
+      <Filter>tests-data</Filter>
+    </Text>
+    <Text Include="Test13.txt">
+      <Filter>tests-data</Filter>
+    </Text>
+    <Text Include="Test12.txt">
+      <Filter>tests-data</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputParams.h">
