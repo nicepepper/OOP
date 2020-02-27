@@ -2,19 +2,21 @@
 
 float GetComplementOfMatrix3x3(const Matrix& matrix, int y, int x)
 {
-	std::array<float, 4> matrixElement = {};
-	int desiredItem = 0;
+	std::array<float, 4> matrixElements = { 0 };
+
+	int itemNumber = 0;
+
 	for (int i = 0; i < SQUARE_MATRIX_SIZE; i++)
 	{
 		for (int j = 0; j < SQUARE_MATRIX_SIZE; j++)
 		{
 			if ((i != y) && (j != x))
 			{
-				matrixElement[desiredItem++] = matrix[i][j];
+				matrixElements[itemNumber++] = matrix[i][j];
 			}
 		}
 	}
-	return ((matrixElement[0] * matrixElement[3]) - (matrixElement[1] * matrixElement[2]));
+	return ((matrixElements[0] * matrixElements[3]) - (matrixElements[1] * matrixElements[2]));
 }
 
 float GetMatrixDeterminant3x3(const Matrix& m)
@@ -23,23 +25,11 @@ float GetMatrixDeterminant3x3(const Matrix& m)
 		- (m[0][2] * m[1][1] * m[2][0]) - (m[0][0] * m[1][2] * m[2][1]) - (m[0][1] * m[1][0] * m[2][2]);
 }
 
-void MultipleMatrixByNumber(Matrix& matrix, float number)
-{
-	for (size_t i = 0; i < SQUARE_MATRIX_SIZE; i++)
-	{
-		for (size_t j = 0; j < SQUARE_MATRIX_SIZE; j++)
-		{
-			matrix[i][j] = matrix[i][j] * number;
-		}
-	}
-}
-	
-
 void TransposeMatrix3x3(Matrix& matrix)
 {
-	for (size_t i = 0; i < SQUARE_MATRIX_SIZE; i++)
+	for (int i = 0; i < SQUARE_MATRIX_SIZE; i++)
 	{
-		for (size_t j = 0; j < SQUARE_MATRIX_SIZE; j++)
+		for (int j = i; j < SQUARE_MATRIX_SIZE; j++)
 		{
 			std::swap(matrix[i][j], matrix[j][i]);
 		}
@@ -48,24 +38,35 @@ void TransposeMatrix3x3(Matrix& matrix)
 
 Matrix GetComplementMatrix3x3(const Matrix& matrix)
 {
-	Matrix resultingMatrix;
+	Matrix desiredMatrix;
 	int sign = 1;
-	for (size_t i = 0; i < SQUARE_MATRIX_SIZE; i++)
+	for (int i = 0; i < SQUARE_MATRIX_SIZE; i++)
 	{
-		for (size_t j = 0; j < SQUARE_MATRIX_SIZE; j++)
+		for (int j = 0; j < SQUARE_MATRIX_SIZE; j++)
 		{
-			resultingMatrix[i][j] = float(sign) * GetComplementOfMatrix3x3(matrix, i, j);
+			desiredMatrix[i][j] = static_cast<float>(sign) * GetComplementOfMatrix3x3(matrix, i, j);
 			sign *= -1;
 		}
-		return resultingMatrix;
+	}
+	return desiredMatrix;
+}
+
+void MultipleMatrixByNumber(Matrix& matrix, float number)
+{
+	for (int i = 0; i < SQUARE_MATRIX_SIZE; i++)
+	{
+		for (int j = 0; j < SQUARE_MATRIX_SIZE; j++)
+		{
+			matrix[i][j] = matrix[i][j] * number;
+		}
 	}
 }
 
 void PrintMatrix(const Matrix& matrix)
 {
-	for (size_t i = 0; i < SQUARE_MATRIX_SIZE; i++)
+	for (int i = 0; i < SQUARE_MATRIX_SIZE; i++)
 	{
-		for (size_t j = 0; j < SQUARE_MATRIX_SIZE; j++)
+		for (int j = 0; j < SQUARE_MATRIX_SIZE; j++)
 		{
 			std::cout << std::setprecision(3) << std::fixed << matrix[i][j] << " ";
 		}

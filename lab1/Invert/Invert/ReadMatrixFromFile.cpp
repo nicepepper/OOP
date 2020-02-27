@@ -1,7 +1,5 @@
 #include "ReadMatrixFromFile.h"
 
-
-
 // надо ли проверять корректность данных в файле ?
 bool InitializeMatrixRow(Matrix& matrix, int rowNumber, const std::string& str)
 {
