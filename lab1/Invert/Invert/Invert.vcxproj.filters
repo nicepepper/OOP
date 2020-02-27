@@ -43,5 +43,22 @@
     <Text Include="test1.txt">
       <Filter>tests-data</Filter>
     </Text>
+    <Text Include="test1-out.txt">
+      <Filter>tests-data</Filter>
+    </Text>
+    <Text Include="test2.txt">
+      <Filter>tests-data</Filter>
+    </Text>
+    <Text Include="test5.txt">
+      <Filter>tests-data</Filter>
+    </Text>
+    <Text Include="test5-out.txt">
+      <Filter>tests-data</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="tests.bat">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
