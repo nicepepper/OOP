@@ -7,8 +7,8 @@
 #include <string>
 #include <vector>
 
-bool isNumberInString(const std::string& str);
+bool IsNumberInString(const std::string& str);
 
-bool isNumberInRange(const std::string& str, int& number);
+bool IsNumberInRange(const std::string& str, int& number);
 
-bool is—orrectValue(const std::string value, const int sourceNotation, const std::vector<char>& alphabet);
+bool IsCorrectValue(const std::string& value, const int sourceNotation);

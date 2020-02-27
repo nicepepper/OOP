@@ -24,10 +24,10 @@
     <ClCompile Include="InputParams.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="inputValidator.h.cpp">
+    <ClCompile Include="ConversionOfStringsAndNumbers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ConversionOfStringsAndNumbers.cpp">
+    <ClCompile Include="inputValidator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,6 +56,9 @@
       <Filter>tests-data</Filter>
     </Text>
     <Text Include="Test12.txt">
+      <Filter>tests-data</Filter>
+    </Text>
+    <Text Include="Test9.txt">
       <Filter>tests-data</Filter>
     </Text>
   </ItemGroup>

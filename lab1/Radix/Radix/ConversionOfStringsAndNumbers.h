@@ -6,6 +6,6 @@
 #include <string>
 #include <vector>
 
-TypeInteger StringToInt(const std::string& value, const TypeInteger& radix, bool& wasError, const std::vector<char>& alphabet);
+TypeInteger StringToInt(const std::string& value, const TypeInteger& radix, bool& wasError);
 
-std::string IntToString(TypeInteger number, const TypeInteger& radix, bool& wasError, const std::vector<char>& alphabet);
+std::string IntToString(TypeInteger number, const TypeInteger& radix, bool& wasError);

@@ -15,20 +15,20 @@ int main(int argc, char* argv[])
 	if (auto params = ParseArgs(argc, argv))
 	{
 		int sourceNotation(0);
-		if (!isNumberInRange(params->source, sourceNotation))
+		if (!IsNumberInRange(params->source, sourceNotation))
 		{
 			std::cout << "Argument <source notation> is set incorrectly, specify a number in the range from 2 to 36 " << std::endl;
 			return 1;
 		}
 
 		int destinationNotation(0);
-		if (!isNumberInRange(params->destination, destinationNotation))
+		if (!IsNumberInRange(params->destination, destinationNotation))
 		{
 			std::cout << "Argument <destination notation> is set incorrectly, specify a number in the range from 2 to 36 " << std::endl;
 			return 1;
 		}
 
-		if (!isСorrectValue(params->value, sourceNotation, alphabetOfСharacters))
+		if (!IsCorrectValue(params->value, sourceNotation))
 		{
 			std::cout << "This value is not correct.\n"
 					  << "It contains characters that are not allowed for the number system!" << std::endl;
@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
 		}
 
 		bool wasError = false;
-		TypeInteger result = StringToInt(params->value, sourceNotation, wasError, alphabetOfСharacters);
+		TypeInteger result = StringToInt(params->value, sourceNotation, wasError);
 		if (wasError)
 		{
 			std::cout << "Integer overflow!\n"
@@ -44,8 +44,8 @@ int main(int argc, char* argv[])
 			return 1;
 		}
 
-		//нужен пример ошиьки я не могу определиться что тут может быть
-		std::string strResult = IntToString(result, destinationNotation, wasError, alphabetOfСharacters);
+		//нужен пример ошиыки я не могу определиться что тут может быть
+		std::string strResult = IntToString(result, destinationNotation, wasError);
 		if (!wasError)
 		{
 			std::cout << strResult << std::endl;

@@ -2,9 +2,9 @@
 #include <limits>
 #include <vector>
 
-typedef short TypeInteger;
-const short MAX_INTEGER = SHRT_MAX;
-const short MIN_INTEGER = SHRT_MIN;
+typedef int TypeInteger;
+const int MAX_INTEGER = INT_MAX;
+const int MIN_INTEGER = INT_MIN;
 
 const std::vector<char> alphabetOf—haracters{
 	'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B',

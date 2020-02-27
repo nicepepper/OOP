@@ -38,26 +38,20 @@ fc Test6.txt %OUT% > nul  || goto err
 echo Test 6 passed
 
 REM 100000(8) = 32768(10) - Integer overflow
-%PROGRAM% "8" "10" "100000" && goto err
-echo Test 7 passed
-
 REM 77777(8) = 32767(10)
 %PROGRAM% "8" "10" "77777" > %OUT% || goto err
 fc Test8.txt %OUT% > nul  || goto err
 echo Test 8 passed
 
-REM -100001(8) = -32769(10) - Integer overflow
-%PROGRAM% "8" "10" "-100001" && goto err
+REM проверка на 0
+%PROGRAM% "8" "10" "0" > %OUT% || goto err
+fc Test9.txt %OUT% > nul || goto err
 echo Test 9 passed
 
 REM -100000(8) = -32768(10)
 %PROGRAM% "8" "10" "-100000" > %OUT% || goto err
 fc Test10.txt %OUT% > nul  || goto err
 echo Test 10 passed
-
-REM 32768(10) = (10) - Integer overflow
-%PROGRAM% "10" "2" "32768" && goto err
-echo Test 11 passed
 
 REM 32767(10) = 111111111111111(2)
 %PROGRAM% "10" "2" "32767" > %OUT% || goto err
@@ -72,10 +66,6 @@ echo Test 13 passed
 REM third parameter is bad
 %PROGRAM% "2" "10" "-" && goto err
 echo Test 14 passed
-
-REM 1000000000000000(2) = 32768(10) third parameter is bad
-%PROGRAM% "2" "10" "1000000000000000" && goto err
-echo Test 13 passed
 
 REM third parameter is bad
 %PROGRAM% "2" "10" "--10" && goto err

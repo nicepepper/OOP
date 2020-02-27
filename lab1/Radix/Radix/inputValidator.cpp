@@ -1,6 +1,6 @@
 #include "inputValidator.h"
 
-bool isNumberInString(const std::string& str)
+bool IsNumberInString(const std::string& str)
 {
 	for (size_t i = 0; i < str.size(); i++)
 	{
@@ -12,11 +12,11 @@ bool isNumberInString(const std::string& str)
 	return true;
 }
 
-bool isNumberInRange(const std::string& str, int& number)
+bool IsNumberInRange(const std::string& str, int& number)
 {
 	constexpr int minimalNumberSystem = 2;
-	constexpr int maximumNumberSystem = 36;
-	if (isNumberInString(str))
+	constexpr int maximumNumberSystem = 36;	
+	if (IsNumberInString(str))
 	{
 		number = atoi(str.c_str());
 		if ((number >= minimalNumberSystem) && (number <= maximumNumberSystem))
@@ -27,7 +27,7 @@ bool isNumberInRange(const std::string& str, int& number)
 	return false;
 }
 
-bool is—orrectValue(const std::string value, const int sourceNotation, const std::vector<char>& alphabet)
+bool IsCorrectValue(const std::string& value, const int sourceNotation)
 {
 	constexpr int minusPosition = 36;
 	bool found(false);
@@ -36,10 +36,10 @@ bool is—orrectValue(const std::string value, const int sourceNotation, const std
 	for (size_t i = 0; i < value.size(); i++)
 	{
 		found = false;
-		std::vector<char>::const_iterator result = std::find(alphabet.begin(), alphabet.end(), value.at(i));
-		if (result != alphabet.end())
+		std::vector<char>::const_iterator result = std::find(alphabetOf—haracters.begin(), alphabetOf—haracters.end(), value.at(i));
+		if (result != alphabetOf—haracters.end())
 		{
-			position = std::distance(alphabet.begin(), result);
+			position = std::distance(alphabetOf—haracters.begin(), result);
 			found = true;
 		}
 		if (position == minusPosition)
