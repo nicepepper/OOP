@@ -1,23 +1,64 @@
 #include "ConversionOfStringsAndNumbers.h"
 
-unsigned OverflowAdd(unsigned x, unsigned y, bool& overflow)
+unsigned OverflowAdd(unsigned x, unsigned y, bool& overflow, const unsigned max)
 {
-	overflow = x + y <= static_cast<unsigned>(INT_MAX) + 1;
-	return x + y;
+	overflow = x + y > static_cast<unsigned>(max);
+	if (!overflow)
+	{
+		return x + y;
+	}
+	return 0;
 }
 
-unsigned OverflowMult(unsigned x, unsigned y, bool& overflow)
+unsigned OverflowMult(unsigned x, unsigned y, bool& overflow, const unsigned max)
 {
-	overflow = false;
 	if (x != 0)
 	{
-		overflow = (static_cast<unsigned>(INT_MAX) + 1) / x > y;
+		overflow = (static_cast<unsigned>(max) + 1) / x < y;
 	}
 	if (!overflow)
 	{
 		return x * y;
 	}
 	return 0;
+}
+
+unsigned StringToUnsignedInteger(const std::string& value, const TypeInteger& radix, bool& overflow, const unsigned max)
+{
+	unsigned result(0);
+	unsigned digit(0);
+	for (size_t i = 0; i < value.size(); i++)
+	{
+		digit = static_cast<unsigned>(distance(alphabetOf—haracters.begin(), std::find(alphabetOf—haracters.begin(), alphabetOf—haracters.end(), value.at(i))));
+		if (digit == 36)
+		{
+			continue;
+		}
+
+		if (!overflow)
+		{
+			result = OverflowMult(result, radix, overflow, max);
+			if (overflow)
+			{
+				break;
+			}
+			result = OverflowAdd(result, digit, overflow, max);
+
+			if (overflow)
+			{
+				break;
+			}
+		}
+		else
+		{
+			break;
+		}
+	}
+	if (overflow)
+	{
+		return 1;
+	}
+	return result;
 }
 
 TypeInteger StringToInt(const std::string& value, const TypeInteger& radix, bool& wasError)
@@ -37,43 +78,24 @@ TypeInteger StringToInt(const std::string& value, const TypeInteger& radix, bool
 		wasError = true;
 		return 0;
 	}
-	assert(IsStringCorrectForNumberSystem(value, radix));
-	
+	if (!IsStringCorrectForNumberSystem(value, radix))
+	{
+		wasError = true;
+		return 0;
+	}
+
 	TypeInteger result(0);
-	TypeInteger digit(0);
-	wasError = false;
+	unsigned max(0);
 	if (value[0] != minusSign)
 	{
-		for (ptrdiff_t i = value.size() - 1, degree—ounter = 0; i >= 0; --i, ++degree—ounter)
-		{
-			digit = (TypeInteger)std::distance(alphabetOf—haracters.begin(), std::find(alphabetOf—haracters.begin(), alphabetOf—haracters.end(), value.at(i)));
-			if ((MAX_INTEGER - digit * pow(radix, degree—ounter)) >= result)
-			{
-				result += digit * (TypeInteger)pow(radix, degree—ounter);
-			}
-			else
-			{
-				wasError = true;
-				return 0;
-			}
-		}
+		max = static_cast<unsigned>(MAX_INTEGER);
+		result = static_cast<TypeInteger>(StringToUnsignedInteger(value, radix, wasError, max));
 	}
 	else
 	{
-		for (size_t i = value.size() - 1, degree—ounter = 0; i > 0; --i, ++degree—ounter)
-		{
-			digit = (TypeInteger)std::distance(alphabetOf—haracters.begin(), std::find(alphabetOf—haracters.begin(), alphabetOf—haracters.end(), value.at(i)));
-
-			if ((MIN_INTEGER + digit * pow(radix, degree—ounter)) <= result)
-			{
-				result -= digit * (TypeInteger)pow(radix, degree—ounter);
-			}
-			else
-			{
-				wasError = true;
-				return 0;
-			}
-		}
+		max = static_cast<unsigned>(MIN_INTEGER);
+		result = static_cast<TypeInteger>(StringToUnsignedInteger(value, radix, wasError, max));
+		result *= (-1);
 	}
 	return result;
 }
