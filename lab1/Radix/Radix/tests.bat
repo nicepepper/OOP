@@ -37,6 +37,11 @@ REM RF(34) = 1110100101(2)
 fc Test6.txt %OUT% > nul  || goto err
 echo Test 6 passed
 
+REM 7FFFFFFF(16) = 2147483647(10)
+%PROGRAM% 16 10 7FFFFFFF > %OUT% || goto err
+fc Test7.txt %OUT% > nul || goto err
+echo Test 7 passed
+
 REM 100000(8) = 32768(10) - Integer overflow
 REM 77777(8) = 32767(10)
 %PROGRAM% "8" "10" "77777" > %OUT% || goto err
@@ -52,6 +57,11 @@ REM -100000(8) = -32768(10)
 %PROGRAM% "8" "10" "-100000" > %OUT% || goto err
 fc Test10.txt %OUT% > nul  || goto err
 echo Test 10 passed
+
+REM -80000000(16) = -2147483648(10)
+%PROGRAM% 16 10 -80000000 > %OUT% || goto err
+fc Test11.txt %OUT% > nul || goto err
+echo Test 11 passed
 
 REM 32767(10) = 111111111111111(2)
 %PROGRAM% "10" "2" "32767" > %OUT% || goto err
@@ -69,7 +79,15 @@ echo Test 14 passed
 
 REM third parameter is bad
 %PROGRAM% "2" "10" "--10" && goto err
-echo Test 14 passed
+echo Test 15 passed
+
+REM 7FFFFFFF(16) = 2147483647(10)
+%PROGRAM% 16 10 80000000 && goto err
+echo Test 16 passed
+
+REM -80000001(16) = -2147483648(10)
+%PROGRAM% 16 10 -80000001 && goto err
+echo Test 17 passed
 
 REM I successfully tested the tests
 echo All tests passed successfuly

@@ -34,3 +34,36 @@ void CopyFileWithReplace(std::istream& input, std::ostream& output, const std::s
 		output << ReplaceString(line, searchString, replacementString) << "\n";
 	}
 }
+
+bool CopyWithReplace(const std::string& inputFileName, const std::string& outputFileName, const std::string& searchString, const std::string& replaceString)
+{
+	std::ifstream input(inputFileName);
+	std::ofstream output(outputFileName, std::ios::out | std::ios::trunc);
+
+	if (!input.is_open())
+	{
+		std::cout << "Failed to open '" << inputFileName << "' for writing\n";
+		return false;
+	}
+
+	if (!output.is_open())
+	{
+		std::cout << "Failed to open '" << outputFileName << "' for writing\n";
+		return false;
+	}
+
+	CopyFileWithReplace(input, output, searchString, replaceString);
+
+	if (input.bad())
+	{
+		std::cout << "Faild to read data from input file\n";
+		return false;
+	}
+
+	if (!output.flush())
+	{
+		std::cout << "Failed to write data to output file!" << std::endl;
+		return false;
+	}
+	return true;
+}

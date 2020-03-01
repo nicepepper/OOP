@@ -6,35 +6,28 @@
 #include <string>
 #include <vector>
 
-// ???разрешено ли использоваить  strtol()? и подобные функции,
-// ??? вопрос про константы в подключаемых файлах (extern - ifndef/ifendef и так далее что лучше)
-// ??? const или все же constexpr что использовать для такого
-// ??? использование constexpr в функция для локальных переменных это ведь нормально убирать таким образом "магические числа"
 int main(int argc, char* argv[])
 {
 	if (auto params = ParseArgs(argc, argv))
 	{
 		int sourceNotation(0);
-		if (!IsNumberInRange(params->source, sourceNotation))
+		if (!StringValueSuitableForRadix(params->source, sourceNotation))
 		{
 			std::cout << "Argument <source notation> is set incorrectly, specify a number in the range from 2 to 36 " << std::endl;
 			return 1;
 		}
-
 		int destinationNotation(0);
-		if (!IsNumberInRange(params->destination, destinationNotation))
+		if (!StringValueSuitableForRadix(params->destination, destinationNotation))
 		{
 			std::cout << "Argument <destination notation> is set incorrectly, specify a number in the range from 2 to 36 " << std::endl;
 			return 1;
 		}
-
-		if (!IsCorrectValue(params->value, sourceNotation))
+		if (!IsStringCorrectForNumberSystem(params->value, sourceNotation))
 		{
 			std::cout << "This value is not correct.\n"
 					  << "It contains characters that are not allowed for the number system!" << std::endl;
 			return 1;
 		}
-
 		bool wasError = false;
 		TypeInteger result = StringToInt(params->value, sourceNotation, wasError);
 		if (wasError)
@@ -43,12 +36,15 @@ int main(int argc, char* argv[])
 					  << "Incorrect value " << std::endl;
 			return 1;
 		}
-
-		//нужен пример ошиыки я не могу определиться что тут может быть
 		std::string strResult = IntToString(result, destinationNotation, wasError);
 		if (!wasError)
 		{
 			std::cout << strResult << std::endl;
+		}
+		else
+		{
+			std::cout << "error translating from integer to string" << std::endl;
+			return 1;
 		}
 		return 0;
 	}

@@ -29,12 +29,6 @@ REM mo replace with momo
 fc mom-output.txt "%TEMP%\output.txt" > nul || goto err
 echo Test 4-mom passed
 
-REM uppercase
-%MyProgram% uppercase.txt "%TEMP%\output.txt" e E || goto err
-fc uppercase-output.txt "%TEMP%\output.txt" > nul || goto err
-echo test 5-uppercase passed
-
-
 REM Copy missing file shoild fail
 %MyProgram% MissingFile.txt "%TEMP%\output.txt" a b && goto err
 echo Test 6-missing passed

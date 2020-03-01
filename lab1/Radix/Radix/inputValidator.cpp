@@ -12,7 +12,7 @@ bool IsNumberInString(const std::string& str)
 	return true;
 }
 
-bool IsNumberInRange(const std::string& str, int& number)
+bool StringValueSuitableForRadix(const std::string& str, int& number)
 {
 	constexpr int minimalNumberSystem = 2;
 	constexpr int maximumNumberSystem = 36;	
@@ -27,7 +27,7 @@ bool IsNumberInRange(const std::string& str, int& number)
 	return false;
 }
 
-bool IsCorrectValue(const std::string& value, const int sourceNotation)
+bool IsStringCorrectForNumberSystem(const std::string& value, const int sourceNotation)
 {
 	constexpr int minusPosition = 36;
 	bool found(false);

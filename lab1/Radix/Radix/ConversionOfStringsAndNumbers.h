@@ -5,6 +5,7 @@
 #include <iterator>
 #include <string>
 #include <vector>
+#include <iostream>
 
 TypeInteger StringToInt(const std::string& value, const TypeInteger& radix, bool& wasError);
 

@@ -61,6 +61,12 @@
     <Text Include="Test9.txt">
       <Filter>tests-data</Filter>
     </Text>
+    <Text Include="Test7.txt">
+      <Filter>tests-data</Filter>
+    </Text>
+    <Text Include="Test11.txt">
+      <Filter>tests-data</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputParams.h">

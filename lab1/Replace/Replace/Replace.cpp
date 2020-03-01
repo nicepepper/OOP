@@ -9,36 +9,12 @@ int main(int argc, char* argv[])
 {
 	if (auto params = ParseArgs(argc, argv))
 	{
-		std::ifstream input(params->inputFileName);
-		std::ofstream output(params->outputFileName, std::ios::out | std::ios::trunc);
-
-		if (!input.is_open())
+		if (CopyWithReplace(params->inputFileName, params->outputFileName, params->searchString, params->replaceString))
 		{
-			std::cout << "Failed to open '" << params->inputFileName << "' for writing\n";
-			return 1;
+			std::cout << "Replacement string was successful" << std::endl;
+			return 0;		
 		}
-
-		if (!output.is_open())
-		{
-			std::cout << "Failed to open '" << params->outputFileName << "' for writing\n";
-			return 1;
-		}
-
-		CopyFileWithReplace(input, output, params->searchString, params->replaceString);
-
-		if (input.bad())
-		{
-			std::cout << "Faild to read data from input file\n";
-			return 1;
-		}
-
-		if (!output.flush())
-		{
-			std::cout << "Failed to write data to output file!" << std::endl;
-			return 1;
-		}
-
-		return 0;
+		return 1;
 	}
 	else
 	{

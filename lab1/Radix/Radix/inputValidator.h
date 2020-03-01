@@ -9,6 +9,6 @@
 
 bool IsNumberInString(const std::string& str);
 
-bool IsNumberInRange(const std::string& str, int& number);
+bool StringValueSuitableForRadix(const std::string& str, int& number);
 
-bool IsCorrectValue(const std::string& value, const int sourceNotation);
+bool IsStringCorrectForNumberSystem(const std::string& value, const int sourceNotation);
