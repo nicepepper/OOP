@@ -1,4 +1,0 @@
-﻿1>------ Rebuild All started: Project: Rle, Configuration: Debug Win32 ------
-1>Rle.cpp
-1>Rle.vcxproj -> C:\IPS-2020\labs\oop\lab1\Rle\Debug\Rle.exe
-========== Rebuild All: 1 succeeded, 0 failed, 0 skipped ==========
