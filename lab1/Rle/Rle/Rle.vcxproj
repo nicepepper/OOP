@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{51F33004-4002-4AF3-8978-96B703B4278A}</ProjectGuid>
+    <ProjectGuid>{B51D038C-2105-45F4-BBA2-988869DF2379}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Rle</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
@@ -151,7 +151,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ParseComandLine.cpp" />
     <ClCompile Include="Rle.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ParseComandLine.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
