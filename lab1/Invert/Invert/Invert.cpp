@@ -7,7 +7,7 @@
 #include <optional>
 #include <string>
 
-std::optional<Matrix> TryInvertMatrix(Matrix& matrix)
+std::optional<Matrix> TryInvertMatrix(Matrix matrix)
 {
 	float det = GetMatrixDeterminant3x3(matrix);
 	if (det == 0)
@@ -16,7 +16,7 @@ std::optional<Matrix> TryInvertMatrix(Matrix& matrix)
 	}
 	TransposeMatrix3x3(matrix);
 	Matrix complements = GetComplementMatrix3x3(matrix);
-	MultipleMatrixByNumber(complements, 1 / det);
+	MultiplyMatrixByNumber(complements, 1 / det);
 	return complements;
 }
 

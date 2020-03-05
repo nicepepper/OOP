@@ -21,9 +21,15 @@
     <ClCompile Include="ParseComandLine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RLEFunctions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ParseComandLine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RLEFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

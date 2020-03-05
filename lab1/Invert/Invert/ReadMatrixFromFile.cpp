@@ -7,11 +7,7 @@ bool InitializeMatrixRow(Matrix& matrix, int rowNumber, const std::string& str)
 	for (size_t i = 0; i < SQUARE_MATRIX_SIZE; i++)
 	{
 		float number(0);
-		try
-		{
-			strStream >> number;
-		}
-		catch (const std::exception&)
+		if (!(strStream >> number))
 		{
 			return false;
 		}

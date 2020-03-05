@@ -153,9 +153,11 @@
   <ItemGroup>
     <ClCompile Include="ParseComandLine.cpp" />
     <ClCompile Include="Rle.cpp" />
+    <ClCompile Include="RLEFunctions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ParseComandLine.h" />
+    <ClInclude Include="RLEFunctions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -4,7 +4,7 @@ float GetComplementOfMatrix3x3(const Matrix& matrix, int y, int x)
 {
 	std::array<float, 4> matrixElements = { 0 };
 
-	int itemNumber = 0;
+	int itemIndex = 0;
 
 	for (int i = 0; i < SQUARE_MATRIX_SIZE; i++)
 	{
@@ -12,7 +12,7 @@ float GetComplementOfMatrix3x3(const Matrix& matrix, int y, int x)
 		{
 			if ((i != y) && (j != x))
 			{
-				matrixElements[itemNumber++] = matrix[i][j];
+				matrixElements[itemIndex++] = matrix[i][j];
 			}
 		}
 	}
@@ -39,36 +39,36 @@ void TransposeMatrix3x3(Matrix& matrix)
 Matrix GetComplementMatrix3x3(const Matrix& matrix)
 {
 	Matrix desiredMatrix;
-	int sign = 1;
+	float sign = 1;
 	for (int i = 0; i < SQUARE_MATRIX_SIZE; i++)
 	{
 		for (int j = 0; j < SQUARE_MATRIX_SIZE; j++)
 		{
-			desiredMatrix[i][j] = static_cast<float>(sign) * GetComplementOfMatrix3x3(matrix, i, j);
-			sign *= -1;
+			desiredMatrix[i][j] = sign * GetComplementOfMatrix3x3(matrix, i, j);
+			sign = -sign;
 		}
 	}
 	return desiredMatrix;
 }
 
-void MultipleMatrixByNumber(Matrix& matrix, float number)
+void MultiplyMatrixByNumber(Matrix& matrix, float number)
 {
-	for (int i = 0; i < SQUARE_MATRIX_SIZE; i++)
+	for (auto& row : matrix)
 	{
-		for (int j = 0; j < SQUARE_MATRIX_SIZE; j++)
+		for (auto& item : row)
 		{
-			matrix[i][j] = matrix[i][j] * number;
+			item *= number;		
 		}
 	}
 }
 
 void PrintMatrix(const Matrix& matrix)
 {
-	for (int i = 0; i < SQUARE_MATRIX_SIZE; i++)
+	for (auto& row : matrix)
 	{
-		for (int j = 0; j < SQUARE_MATRIX_SIZE; j++)
+		for (auto& item : row)
 		{
-			std::cout << std::setprecision(3) << std::fixed << matrix[i][j] << " ";
+			std::cout << std::setprecision(3) << std::fixed << item << " ";
 		}
 		std::cout << std::endl;
 	}
