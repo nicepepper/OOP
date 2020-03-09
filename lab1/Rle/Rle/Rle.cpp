@@ -5,11 +5,9 @@
 #include "RLEFunctions.h"
 #include <iostream>
 
-// ? 255 - это символ конца строки
-
 void DataCompressionAlgorithmRLE(const ProgramParameters& params)
 {
-	if (params.mode == pack)
+	if (params.mode == Mode::PACK)	
 	{
 		if (!IsSuccessfulEcoding(params.inputFileName, params.outputFileName))
 		{
@@ -27,8 +25,7 @@ void DataCompressionAlgorithmRLE(const ProgramParameters& params)
 
 int main(int argc, char* argv[])
 {
-	auto params = ParseComandLine(argc, argv);
-	if (params)
+	if (auto params = ParseComandLine(argc, argv))
 	{
 		DataCompressionAlgorithmRLE(*params);
 	}

@@ -19,6 +19,7 @@ uintmax_t GetFileSize(const std::string& fileName)
 	catch (fs::filesystem_error& e)
 	{
 		std::cout << e.what() << '\n';
+		return 0;
 	}
 }
 
@@ -31,12 +32,12 @@ std::optional<Mode> GetMode(const std::string& modeString)
 {
 	if (modeString == PACK_MODE)
 	{
-		return pack;
+		return Mode::PACK;
 	}
 
 	if (modeString == UNPACK_MODE)
 	{
-		return unpack;
+		return Mode::UNPACK;
 	}
 
 	return std::nullopt;

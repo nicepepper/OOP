@@ -4,11 +4,14 @@
 #include <optional>
 #include <string>
 
-enum Mode
+enum class Mode 
 {
-	pack,
-	unpack
+	PACK,
+	UNPACK
 };
+
+uintmax_t GetFileSize(const std::string& fileName);
+bool IsFileSizeEven(const uintmax_t& number);
 
 struct ProgramParameters
 {
