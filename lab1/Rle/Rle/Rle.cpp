@@ -5,21 +5,25 @@
 #include "RLEFunctions.h"
 #include <iostream>
 
-void DataCompressionAlgorithmRLE(const ProgramParameters& params)
+bool DataCompressionAlgorithmRLE(const ProgramParameters& params)
 {
-	if (params.mode == Mode::PACK)	
+	if (params.mode == Mode::PACK)
 	{
 		if (!IsSuccessfulEcoding(params.inputFileName, params.outputFileName))
 		{
 			std::cout << "An error has happened encoding file" << std::endl;
+			return false;
 		}
+		return true;
 	}
 	else
 	{
 		if (!IsSuccessfulDecoding(params.inputFileName, params.outputFileName))
 		{
-			std::cerr << "An error has happened dencoding file" << std::endl;
+			std::cout << "An error has happened dencoding file" << std::endl;
+			return false;
 		}
+		return true;
 	}
 }
 
@@ -27,7 +31,7 @@ int main(int argc, char* argv[])
 {
 	if (auto params = ParseComandLine(argc, argv))
 	{
-		DataCompressionAlgorithmRLE(*params);
+		return DataCompressionAlgorithmRLE(*params) ? 0 : 1;
 	}
 	else
 	{
@@ -37,5 +41,4 @@ int main(int argc, char* argv[])
 				  << "        Rle.exe unpack <input file> <output file> " << std::endl;
 		return 1;
 	}
-	return 0;
 }

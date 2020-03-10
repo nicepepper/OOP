@@ -21,22 +21,27 @@ void DescriptorEncodingOperation(RLEItemStatuses& itemStatuses, std::ostream& ou
 		itemStatuses.currentValue = itemStatuses.ch;
 	}
 
-	if ((itemStatuses.currentValue == itemStatuses.ch) && (itemStatuses.ch < UCHAR_MAX))
+	if ((itemStatuses.currentValue == itemStatuses.ch) && (itemStatuses.counter < UCHAR_MAX))
 	{
 		itemStatuses.counter++;
 	}
 	else
 	{
-		if (itemStatuses.counter > 0 || itemStatuses.counter == UCHAR_MAX)
-		{
-			PrintEncoded(output, itemStatuses);
-			itemStatuses.counter = 0;
-			DescriptorEncodingOperation(itemStatuses, output);
-			return;
-		}
+		PrintEncoded(output, itemStatuses);
+		itemStatuses.counter = 0;
+		DescriptorEncodingOperation(itemStatuses, output);
+		return;
+
+		//if ((itemStatuses.counter > 0) || (itemStatuses.counter == UCHAR_MAX))
+		//{
+		//	PrintEncoded(output, itemStatuses);
+		//	itemStatuses.counter = 0;
+		//	DescriptorEncodingOperation(itemStatuses, output);
+		//	return;
+		//}
 	}
 
-	if (itemStatuses.eof && itemStatuses.counter > 0)
+	if ((itemStatuses.eof) && (itemStatuses.counter > 0))
 	{
 		PrintEncoded(output, itemStatuses);
 	}
@@ -45,7 +50,7 @@ void DescriptorEncodingOperation(RLEItemStatuses& itemStatuses, std::ostream& ou
 bool IsSuccessfulEcoding(const std::string& inputFileName, const std::string& outputFileName)
 {
 	std::ifstream input(inputFileName, std::ios::binary | std::ios::in);
-	std::ofstream output(outputFileName, std::ios::binary);
+	std::ofstream output(outputFileName, std::ios::binary | std::ios::out | std::ios::trunc);
 
 	if (!input.is_open())
 	{
@@ -78,6 +83,7 @@ bool IsSuccessfulDecoding(const std::string& inputFileName, const std::string& o
 
 	if (!IsFileSizeEven(fileSize))
 	{
+		std::cout << "Odd packed file length" << std::endl;
 		return false;
 	}
 
@@ -87,6 +93,12 @@ bool IsSuccessfulDecoding(const std::string& inputFileName, const std::string& o
 	for (std::uintmax_t i = 0; i < fileSize / 2; i++)
 	{
 		input.get(counter);
+		if (counter == 0)
+		{
+			std::cout << "Zero character repetition" << std::endl;
+			return false;
+		}
+
 		input.get(ch);
 
 		for (std::uint8_t i = 0; i < static_cast<uint8_t>(counter); i++)
