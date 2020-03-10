@@ -36,10 +36,10 @@ bool IsStringCorrectForNumberSystem(const std::string& value, const int sourceNo
 	for (size_t i = 0; i < value.size(); i++)
 	{
 		found = false;
-		std::vector<char>::const_iterator result = std::find(alphabetOf—haracters.begin(), alphabetOf—haracters.end(), value.at(i));
-		if (result != alphabetOf—haracters.end())
+		std::vector<char>::const_iterator result = std::find(alphabetOfCharacters.begin(), alphabetOfCharacters.end(), value.at(i));
+		if (result != alphabetOfCharacters.end())
 		{
-			position = std::distance(alphabetOf—haracters.begin(), result);
+			position = std::distance(alphabetOfCharacters.begin(), result);
 			found = true;
 		}
 		if (position == minusPosition)

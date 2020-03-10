@@ -29,7 +29,7 @@ unsigned StringToUnsignedInteger(const std::string& value, const TypeInteger& ra
 	unsigned digit(0);
 	for (size_t i = 0; i < value.size(); i++)
 	{
-		digit = static_cast<unsigned>(distance(alphabetOf—haracters.begin(), std::find(alphabetOf—haracters.begin(), alphabetOf—haracters.end(), value.at(i))));
+		digit = static_cast<unsigned>(distance(alphabetOfCharacters.begin(), std::find(alphabetOfCharacters.begin(), alphabetOfCharacters.end(), value.at(i))));
 		if (digit == 36)
 		{
 			continue;
@@ -122,7 +122,7 @@ std::string IntToString(TypeInteger number, const TypeInteger& radix, bool& wasE
 	char symbol;
 	while (number != 0)
 	{
-		symbol = alphabetOf—haracters[abs(number % radix)];
+		symbol = alphabetOfCharacters[abs(number % radix)];
 		number /= radix;
 		resultStr.push_back(symbol);
 	}
