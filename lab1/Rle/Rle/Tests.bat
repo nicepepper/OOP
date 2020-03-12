@@ -34,7 +34,7 @@ REM empty file (encoding + decoding)
 fc Test7-out.bin %OUT% > nul || goto err
 %PROGRAM% unpack Test7-out.bin %OUT% ||got err
 fc Test7.bin %OUT% > nul || goto err
-echo  Test 7 passed
+echo Test 7 passed
 
 REM 255A, 256B, 257C - encoding
 %PROGRAM% pack Test8.bin %OUT% || goto err
@@ -59,7 +59,11 @@ REM File containing characters code 255 (0xFF)
 fc Test12-out.bin %OUT% > nul ||goto err
 echo Test 12 passed
 
-
+REM check your compiled file
+%PROGRAM% pack %PROGRAM% %OUT% || goto err
+%PROGRAM% unpack %OUT% "%TEMP%\output1.exe" || goto err
+fc /B %PROGRAM% "%TEMP%\output1.exe" > nul || goto err
+echo Test 13 passed
 
 REM I successfully tested the tests
 echo All tests passed successfuly

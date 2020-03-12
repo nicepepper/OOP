@@ -1,112 +1,180 @@
 #include "RLEFunctions.h"
 
-struct RLEItemStatuses
+struct RLEChunk
 {
-	bool eof = false;
-	char ch = 0;
 	char currentValue = 0;
 	unsigned char counter = 0;
 };
 
-void PrintEncoded(std::ostream& output, RLEItemStatuses& itemStatuses)
+bool SaveChunk(std::ostream& output, RLEChunk& chunk)
 {
-	output.write(reinterpret_cast<char*>(&itemStatuses.counter), sizeof itemStatuses.counter);
-	output.write(&itemStatuses.currentValue, sizeof itemStatuses.currentValue);
-}
-
-void DescriptorEncodingOperation(RLEItemStatuses& itemStatuses, std::ostream& output)
-{
-	if (itemStatuses.counter == 0)
-	{
-		itemStatuses.currentValue = itemStatuses.ch;
-	}
-
-	if ((itemStatuses.currentValue == itemStatuses.ch) && (itemStatuses.counter < UCHAR_MAX))
-	{
-		itemStatuses.counter++;
-	}
-	else
-	{
-		PrintEncoded(output, itemStatuses);
-		itemStatuses.counter = 0;
-		DescriptorEncodingOperation(itemStatuses, output);
-		return;
-
-		//if ((itemStatuses.counter > 0) || (itemStatuses.counter == UCHAR_MAX))
-		//{
-		//	PrintEncoded(output, itemStatuses);
-		//	itemStatuses.counter = 0;
-		//	DescriptorEncodingOperation(itemStatuses, output);
-		//	return;
-		//}
-	}
-
-	if ((itemStatuses.eof) && (itemStatuses.counter > 0))
-	{
-		PrintEncoded(output, itemStatuses);
-	}
-}
-
-bool IsSuccessfulEcoding(const std::string& inputFileName, const std::string& outputFileName)
-{
-	std::ifstream input(inputFileName, std::ios::binary | std::ios::in);
-	std::ofstream output(outputFileName, std::ios::binary | std::ios::out | std::ios::trunc);
-
-	if (!input.is_open())
+	if (!output.write(reinterpret_cast<char*>(&chunk.counter), sizeof chunk.counter))
 	{
 		return false;
 	}
+	if (!output.write(&chunk.currentValue, sizeof chunk.currentValue))
+	{
+		return false;
+	}
+	return true;
+}
 
-	RLEItemStatuses itemStatuses;
+bool UpdateChunk(RLEChunk& chunk, char ch, bool eof, std::ostream& output)
+{
+	if (chunk.counter == 0)
+	{
+		chunk.currentValue = ch;
+	}
+	if ((chunk.currentValue == ch) && (chunk.counter < UCHAR_MAX))
+	{
+		chunk.counter++;
+	}
+	else
+	{
+		if (!SaveChunk(output, chunk))
+		{
+			std::cout << "Chunk conservation problem\n";
+			return false;
+		}
+		chunk.counter = 0;
+		if (!UpdateChunk(chunk, ch, eof, output))
+		{
+			return false;
+		}
+	}
+	if ((eof) && (chunk.counter > 0))
+	{
+		if (!SaveChunk(output, chunk))
+		{
+			std::cout << "Chunk conservation problem\n";
+			return false;
+		}
+	}
+}
+
+bool RLEEncoding(const std::string& inputFileName, const std::string& outputFileName)
+{
+	std::ifstream input(inputFileName, std::ios::binary | std::ios::in);
+	std::ofstream output(outputFileName, std::ios::binary | std::ios::out | std::ios::trunc);
+	if (!input.is_open())
+	{
+		std::cout << "Failed to open '" << inputFileName << "' for reading\n";
+		return false;
+	}
+	if (!output.is_open())
+	{
+		std::cout << "Failed to open '" << outputFileName << "' for writing\n";
+		return false;
+	}
+
+	bool eof = false;
+	char ch;
+	RLEChunk chunk;
 
 	auto fileSize = GetFileSize(inputFileName);
 	for (std::uintmax_t i = 0; i < fileSize; i++)
 	{
-		itemStatuses.eof = (i == fileSize - 1) ? true : false;
-		if (input.good())
+		eof = (i == fileSize - 1) ? true : false;
+		if (input.get(ch))
 		{
-			input.get(itemStatuses.ch);
-			DescriptorEncodingOperation(itemStatuses, output);
+			if (!UpdateChunk(chunk, ch, eof, output))
+			{
+				break;
+			}
 		}
 	}
 
-	output.flush();
+	if (input.bad())
+	{
+		std::cout << "Faild to read data from input file\n";
+		return false;
+	}
+	if (!output.flush())
+	{
+		std::cout << "Filed to write data to output file\n";
+		return false;
+	}
 	return true;
 }
 
-bool IsSuccessfulDecoding(const std::string& inputFileName, const std::string& outputFileName)
+bool ReadChunk(RLEChunk& chunk, std::istream& input)
+{
+	char ch;
+	if (!input.get(ch))
+	{
+		return false;
+	}
+	chunk.counter = static_cast<unsigned char>(ch);
+	if (chunk.counter == 0)
+	{
+		std::cout << "Zero character repetition" << std::endl;
+		return false;
+	}
+	if (!input.get(chunk.currentValue))
+	{
+		return false;
+	}
+	return true;
+}
+
+bool WriteChunk(RLEChunk& chunk, std::ostream& output)
+{
+	for (std::uint8_t i = 0; i < static_cast<uint8_t>(chunk.counter); i++)
+	{
+		if (!output.write(&chunk.currentValue, sizeof chunk.currentValue))
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+bool RLEDecoding(const std::string& inputFileName, const std::string& outputFileName)
 {
 	std::ifstream input(inputFileName, std::ios::binary | std::ios::in);
 	std::ofstream output(outputFileName, std::ios::binary | std::ios::out | std::ios::trunc);
+	if (!input.is_open())
+	{
+		std::cout << "Failed to open '" << inputFileName << "' for reading\n";
+		return false;
+	}
+	if (!output.is_open())
+	{
+		std::cout << "Failed to open '" << outputFileName << "' for writing\n";
+		return false;
+	}
 
 	auto fileSize = GetFileSize(inputFileName);
-
 	if (!IsFileSizeEven(fileSize))
 	{
 		std::cout << "Odd packed file length" << std::endl;
 		return false;
 	}
 
-	char counter;
-	char ch;
-
+	RLEChunk chunk;
 	for (std::uintmax_t i = 0; i < fileSize / 2; i++)
 	{
-		input.get(counter);
-		if (counter == 0)
+		if (!ReadChunk(chunk, input))
 		{
-			std::cout << "Zero character repetition" << std::endl;
+			std::cout << "Reading error\n";
 			return false;
 		}
-
-		input.get(ch);
-
-		for (std::uint8_t i = 0; i < static_cast<uint8_t>(counter); i++)
+		if (!WriteChunk(chunk, output))
 		{
-			output.write(&ch, sizeof ch);
+			std::cout << "Writing error\n";
+			return false;
 		}
 	}
 
-	output.flush();
+	if (input.bad())
+	{
+		std::cout << "Faild to read data from input file\n";
+		return false;
+	}
+	if (!output.flush())
+	{
+		std::cout << "Filed to write data to output file\n";
+		return false;
+	}
 	return true;
 }

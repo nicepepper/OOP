@@ -9,7 +9,7 @@ bool DataCompressionAlgorithmRLE(const ProgramParameters& params)
 {
 	if (params.mode == Mode::PACK)
 	{
-		if (!IsSuccessfulEcoding(params.inputFileName, params.outputFileName))
+		if (!RLEEncoding(params.inputFileName, params.outputFileName))
 		{
 			std::cout << "An error has happened encoding file" << std::endl;
 			return false;
@@ -18,7 +18,7 @@ bool DataCompressionAlgorithmRLE(const ProgramParameters& params)
 	}
 	else
 	{
-		if (!IsSuccessfulDecoding(params.inputFileName, params.outputFileName))
+		if (!RLEDecoding(params.inputFileName, params.outputFileName))
 		{
 			std::cout << "An error has happened dencoding file" << std::endl;
 			return false;
