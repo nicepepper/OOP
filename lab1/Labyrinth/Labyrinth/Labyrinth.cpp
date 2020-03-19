@@ -6,15 +6,38 @@
 
 int main(int argc, char* argv[])
 {
-	if (auto params = ParseComandLine(argc, argv))
+	auto params = ParseComandLine(argc, argv);
+	if (!params)
 	{
-		std::cout << "Good parametrs\n";
-		return 0;
+			std::cout << "Enter the parameters correctly. Do not forget they should not be empty.\n"
+					  << "Usage : Labyrinth.exe <input file> <output file>" << std::endl;
+			return 1;
+	}
+	
+	auto labyrinth = InitializeLabyrinth(params->inputFileName);
+
+	if (!labyrinth)
+	{
+		std::cout << "An error has been found while initializing labyrinth\n";
+		return 1;
+	}
+
+	if (FindTheWayFromLabyrinth(*labyrinth))
+	{
+		if (PrintLabyrinthIntoFile(params->outputFileName, *labyrinth))
+		{
+			return 0;
+		}
+		else
+		{
+			std::cout << "Output file error\n";
+			return 1;
+		}
 	}
 	else
 	{
-		std::cout << "Enter the parameters correctly. Do not forget they should not be empty.\n"
-				  << "Usage : Labyrinth.exe <input file> <output file>" << std::endl;
+		std::cout << "It is impossible to exit the labyrinth\n";
 		return 1;
 	}
+
 }

@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{951086E1-9D57-4528-95BC-63511CDBC48F}</ProjectGuid>
+    <ProjectGuid>{07B27ADA-87B0-4C9F-B3AD-9669B1BAC750}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>Labyrinth</RootNamespace>
+    <RootNamespace>ProcessVector</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -151,14 +151,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="InitializeLabyrinth.cpp" />
-    <ClCompile Include="Labyrinth.cpp" />
-    <ClCompile Include="ParseCommandLine.cpp" />
+    <ClCompile Include="task2.cpp" />
+    <ClCompile Include="VectorProcessor.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="InitializeLabyrinth.h" />
-    <ClInclude Include="LabyrinthConfiguration.h" />
-    <ClInclude Include="ParseCommandLine.h" />
+    <ClInclude Include="VectorProcessor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

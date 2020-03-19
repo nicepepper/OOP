@@ -15,24 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Labyrinth.cpp">
+    <ClCompile Include="task2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ParseCommandLine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InitializeLabyrinth.cpp">
+    <ClCompile Include="VectorProcessor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ParseCommandLine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InitializeLabyrinth.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LabyrinthConfiguration.h">
+    <ClInclude Include="VectorProcessor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
