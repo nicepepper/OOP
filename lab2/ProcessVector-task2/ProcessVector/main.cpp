@@ -1,7 +1,7 @@
 // ProcessVector.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-#include "VectorProcessor.h"
+#include "ProcessVector.h"
 
 int main()
 {
@@ -10,10 +10,10 @@ int main()
 	if (!ReadingFromStreamToVector(std::cin, vectorOfNumbers))
 	{
 		std::cout << "Error reading from stream to vector\n";
-		return 0;
+		return 1;
 	}
 
-	VectorProcessor(vectorOfNumbers);
+	ProcessVector(vectorOfNumbers);
 
 	std::sort(vectorOfNumbers.begin(), vectorOfNumbers.end());
 	PrintVectorOfNumbers(vectorOfNumbers, std::cout);

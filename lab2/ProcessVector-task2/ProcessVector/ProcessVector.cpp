@@ -1,4 +1,5 @@
-﻿#include "VectorProcessor.h"
+#pragma once
+#include "ProcessVector.h"
 
 std::optional<std::vector<double>> ReadingFromStreamToVector(std::istream& cin, std::vector<double>& numbers)
 {
@@ -13,7 +14,7 @@ std::optional<std::vector<double>> ReadingFromStreamToVector(std::istream& cin, 
 	return numbers;
 }
 
-void VectorProcessor(std::vector<double>& numbers)
+void ProcessVector(std::vector<double>& numbers)
 {
 	if (!numbers.empty())
 	{

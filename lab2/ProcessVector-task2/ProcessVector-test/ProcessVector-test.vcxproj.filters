@@ -15,15 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="task2.cpp">
+    <ClCompile Include="ProcessVector-test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VectorProcessor.cpp">
+    <ClCompile Include="..\ProcessVector\ProcessVector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="VectorProcessor.h">
+    <ClInclude Include="..\ProcessVector\ProcessVector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
