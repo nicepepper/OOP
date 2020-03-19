@@ -2,14 +2,15 @@
 //
 
 #include <iostream>
+#include <sstream>
 #define CATCH_CONFIG_MAIN // This tells Catch to provide a main() - only do this in one cpp file
 #include "../catch2/catch.hpp"
 
 #include "ProcessVector/ProcessVector.h"
 
-TEST_CASE("ProcessVector - Each element of the array must be multiplied by the minimum element of this array")
+TEST_CASE("ProcessVector function - Each element of the array must be multiplied by the minimum element of this array")
 {
-	// 
+	//
 	std::vector<double> vector = { -1, 2, 3 };
 	std::vector<double> result = { 1, -2, -3 };
 	ProcessVector(vector);
@@ -26,6 +27,14 @@ TEST_CASE("ProcessVector - Each element of the array must be multiplied by the m
 	result = { 0, 0, 0 };
 	ProcessVector(vector);
 	CHECK(vector == result);
+}
 
-
+TEST_CASE("ReadingFromStreamToVector fnction - read from stream to vector")
+{
+	//empty stream
+	std::stringstream str("");
+	std::vector<double> vector;
+	std::vector<double> result;
+	ReadingFromStreamToVector(str, vector);
+	CHECK(vector == result);
 }
