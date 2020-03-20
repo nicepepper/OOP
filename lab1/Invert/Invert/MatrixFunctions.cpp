@@ -38,17 +38,17 @@ void TransposeMatrix3x3(Matrix& matrix)
 
 Matrix GetComplementMatrix3x3(const Matrix& matrix)
 {
-	Matrix ComplementMatrix3x3;
+	Matrix complementMatrix3x3;
 	float sign = 1;
 	for (int i = 0; i < SQUARE_MATRIX_SIZE; i++)
 	{
 		for (int j = 0; j < SQUARE_MATRIX_SIZE; j++)
 		{
-			ComplementMatrix3x3[i][j] = sign * GetComplementOfMatrix3x3(matrix, i, j);
+			complementMatrix3x3[i][j] = sign * GetComplementOfMatrix3x3(matrix, i, j);
 			sign = -sign;
 		}
 	}
-	return ComplementMatrix3x3;
+	return complementMatrix3x3;
 }
 
 void MultiplyMatrixByNumber(Matrix& matrix, float number)

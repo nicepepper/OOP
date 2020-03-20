@@ -7,7 +7,7 @@ int main()
 {
 	std::vector<double> vectorOfNumbers;
 
-	if (!ReadingFromStreamToVector(std::cin, vectorOfNumbers))
+	if (ReadingFromStreamToVector(std::cin, vectorOfNumbers))
 	{
 		std::cout << "Error reading from stream to vector\n";
 		return 1;
@@ -17,6 +17,5 @@ int main()
 
 	std::sort(vectorOfNumbers.begin(), vectorOfNumbers.end());
 	PrintVectorOfNumbers(vectorOfNumbers, std::cout);
-	std::cout << "Size of vector: " << vectorOfNumbers.size() << "\n";
 	return 0;
 }
