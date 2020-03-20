@@ -4,6 +4,7 @@
 #include <iterator>
 #include <optional>
 #include <vector>
+#include <iomanip>
 
 bool ReadingFromStreamToVector(std::istream& cin, std::vector<double>& numbers);
 void ProcessVector(std::vector<double>& numbers);

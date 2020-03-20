@@ -10,7 +10,7 @@
 
 TEST_CASE("ProcessVector function - Each element of the array must be multiplied by the minimum element of this array")
 {
-	//
+	// ordinary case
 	std::vector<double> vector = { -1, 2, 3 };
 	std::vector<double> result = { 1, -2, -3 };
 	ProcessVector(vector);
@@ -34,7 +34,11 @@ TEST_CASE("ReadingFromStreamToVector fnction - read from stream to vector")
 	//empty stream
 	std::stringstream str("");
 	std::vector<double> vector;
-	std::vector<double> result;
-	ReadingFromStreamToVector(str, vector);
-	CHECK(vector == result);
+	CHECK(ReadingFromStreamToVector(str, vector));
+
+	// Invalid data type served in stream
+	std::stringstream str1("aaaa");
+	vector.clear();
+	CHECK(ReadingFromStreamToVector(str1, vector));
+	CHECK(vector.empty());
 }

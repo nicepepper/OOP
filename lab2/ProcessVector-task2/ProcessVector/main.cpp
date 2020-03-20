@@ -7,9 +7,9 @@ int main()
 {
 	std::vector<double> vectorOfNumbers;
 
-	if (ReadingFromStreamToVector(std::cin, vectorOfNumbers))
+	if (!ReadingFromStreamToVector(std::cin, vectorOfNumbers))
 	{
-		std::cout << "Error reading from stream to vector\n";
+		std::cout << "\nError reading from stream to vector\n";
 		return 1;
 	}
 
