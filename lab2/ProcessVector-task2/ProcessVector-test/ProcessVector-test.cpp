@@ -31,14 +31,25 @@ TEST_CASE("ProcessVector function - Each element of the array must be multiplied
 
 TEST_CASE("ReadingFromStreamToVector fnction - read from stream to vector")
 {
-	//empty stream
+	// empty stream
 	std::stringstream str("");
 	std::vector<double> vector;
-	CHECK(ReadingFromStreamToVector(str, vector));
+	CHECK(!ReadingFromStreamToVector(str, vector));
+
+	// empty stream not empty vector -- vector unchanged
+	std::stringstream str1("");
+	vector = { 123.123, 123123.123, 123213.123 };
+	CHECK(!ReadingFromStreamToVector(str, vector));
+	CHECK(vector.empty());
 
 	// Invalid data type served in stream
-	std::stringstream str1("aaaa");
+	std::stringstream str2("1123.123 123.123 aaa");
 	vector.clear();
-	CHECK(ReadingFromStreamToVector(str1, vector));
+	CHECK(!ReadingFromStreamToVector(str2, vector));
 	CHECK(vector.empty());
+
+	// two blank lines
+	/*std::stringstream str3(" 123.1233 \n\n 123.123");
+	vector.clear();
+	CHECK(ReadingFromStreamToVector(str3, vector));*/
 }

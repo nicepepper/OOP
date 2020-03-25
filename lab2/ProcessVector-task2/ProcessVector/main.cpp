@@ -12,9 +12,7 @@ int main()
 		std::cout << "\nError reading from stream to vector\n";
 		return 1;
 	}
-
 	ProcessVector(vectorOfNumbers);
-
 	std::sort(vectorOfNumbers.begin(), vectorOfNumbers.end());
 	PrintVectorOfNumbers(vectorOfNumbers, std::cout);
 	return 0;
