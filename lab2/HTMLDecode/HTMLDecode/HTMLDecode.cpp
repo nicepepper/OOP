@@ -1,9 +1,9 @@
 ﻿// HTMLDecode.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
+#include "HTMLDecodeFunction.h"
 #include <iostream>
 #include <string>
-#include "HTMLDecodeFunction.h"
 
 int main()
 {

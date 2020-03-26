@@ -1,16 +1,10 @@
 #include "HTMLDecodeFunction.h"
 
-
 constexpr char NOT_FOUND_SYMBOL = '\n';
 
 char EncodedSymbolToDecoded(const std::string& str)
 {
-	return
-		(str == APOSTROPHE_ENCODED) ? APOSTROPHE :
-		(str == QUATATION_MARK_ENCODED) ? QUATATION_MARK :
-		(str == LESS_THAN_SIGN_ENCODED) ? LESS_THAN_SIGN :
-		(str == GREATER_THAN_SIGN_ENCODED) ? GREATER_THAN_SIGN :
-		(str == AMPERSAND_ENCODED) ? AMPERSAND : NOT_FOUND_SYMBOL;
+	return (str == APOSTROPHE_ENCODED) ? APOSTROPHE : (str == QUATATION_MARK_ENCODED) ? QUATATION_MARK : (str == LESS_THAN_SIGN_ENCODED) ? LESS_THAN_SIGN : (str == GREATER_THAN_SIGN_ENCODED) ? GREATER_THAN_SIGN : (str == AMPERSAND_ENCODED) ? AMPERSAND : NOT_FOUND_SYMBOL;
 }
 
 void SearhcTheStartOfSpecialSymbol(std::string& resultStr, std::string& foundEncodedString, const char ch, bool& comparisonStart)
@@ -18,7 +12,7 @@ void SearhcTheStartOfSpecialSymbol(std::string& resultStr, std::string& foundEnc
 	if (ch == FIRST_SYMBOL_OF_ENCODED_HTML_SYMBOLS)
 	{
 		comparisonStart = true;
-		
+
 		if (!foundEncodedString.empty())
 		{
 			resultStr += foundEncodedString;
@@ -27,7 +21,7 @@ void SearhcTheStartOfSpecialSymbol(std::string& resultStr, std::string& foundEnc
 	}
 }
 
-void ComparisonProcessing(std::string& resultStr, std::string& foundEncodedString,const char ch, bool comparisonStart)
+void ComparisonProcessing(std::string& resultStr, std::string& foundEncodedString, const char ch, bool comparisonStart)
 {
 	if (comparisonStart)
 	{
@@ -39,7 +33,7 @@ void ComparisonProcessing(std::string& resultStr, std::string& foundEncodedStrin
 	}
 }
 
-void SearhcTheEndOfSpecialSymbol(std::string& resultStr, std::string& foundEncodedString,const char ch, bool& comparisonStart)
+void SearhcTheEndOfSpecialSymbol(std::string& resultStr, std::string& foundEncodedString, const char ch, bool& comparisonStart)
 {
 	if (comparisonStart && (ch == LAST_SYMBOL_OF_ENCODED_HTML_SYMBOLS))
 	{
