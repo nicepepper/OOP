@@ -4,7 +4,12 @@ constexpr char NOT_FOUND_SYMBOL = '\n';
 
 char EncodedSymbolToDecoded(const std::string& str)
 {
-	return (str == APOSTROPHE_ENCODED) ? APOSTROPHE : (str == QUATATION_MARK_ENCODED) ? QUATATION_MARK : (str == LESS_THAN_SIGN_ENCODED) ? LESS_THAN_SIGN : (str == GREATER_THAN_SIGN_ENCODED) ? GREATER_THAN_SIGN : (str == AMPERSAND_ENCODED) ? AMPERSAND : NOT_FOUND_SYMBOL;
+	return 
+		(str == APOSTROPHE_ENCODED) ? APOSTROPHE : 
+		(str == QUATATION_MARK_ENCODED) ? QUATATION_MARK : 
+		(str == LESS_THAN_SIGN_ENCODED) ? LESS_THAN_SIGN : 
+		(str == GREATER_THAN_SIGN_ENCODED) ? GREATER_THAN_SIGN : 
+		(str == AMPERSAND_ENCODED) ? AMPERSAND : NOT_FOUND_SYMBOL;
 }
 
 void SearhcTheStartOfSpecialSymbol(std::string& resultStr, std::string& foundEncodedString, const char ch, bool& comparisonStart)

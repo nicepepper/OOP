@@ -5,7 +5,7 @@ bool ReadingFromStreamToVector(std::istream& cin, std::vector<double>& numbers)
 {
 	numbers.clear();
 	copy(std::istream_iterator<double>(std::cin), (std::istream_iterator<double>()), std::back_inserter(numbers));
-	if (!std::cin.eof())
+	if (!std::cin.eof() || std::cin.bad() || std::cin.fail())
 	{
 		numbers.clear();
 		return false;

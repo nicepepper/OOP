@@ -47,9 +47,4 @@ TEST_CASE("ReadingFromStreamToVector fnction - read from stream to vector")
 	vector.clear();
 	CHECK(!ReadingFromStreamToVector(str2, vector));
 	CHECK(vector.empty());
-
-	// two blank lines
-	/*std::stringstream str3(" 123.1233 \n\n 123.123");
-	vector.clear();
-	CHECK(ReadingFromStreamToVector(str3, vector));*/
 }
