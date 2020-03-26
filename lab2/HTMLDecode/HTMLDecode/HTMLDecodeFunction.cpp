@@ -5,21 +5,26 @@ constexpr char NOT_FOUND_SYMBOL = '\n';
 
 char GetSymbolToHTMLEntity(const std::string& str)
 {
-	return (str == APOSTROPHE_ENCODED) ? APOSTROPHE : (str == QUATATION_MARK_ENCODED) ? QUATATION_MARK : (str == LESS_THAN_SIGN_ENCODED) ? LESS_THAN_SIGN : (str == GREATER_THAN_SIGN_ENCODED) ? GREATER_THAN_SIGN : (str == AMPERSAND_ENCODED) ? AMPERSAND : NOT_FOUND_SYMBOL;
+	return 
+		(str == APOSTROPHE_ENCODED) ? APOSTROPHE : 
+		(str == QUATATION_MARK_ENCODED) ? QUATATION_MARK : 
+		(str == LESS_THAN_SIGN_ENCODED) ? LESS_THAN_SIGN : 
+		(str == GREATER_THAN_SIGN_ENCODED) ? GREATER_THAN_SIGN : 
+		(str == AMPERSAND_ENCODED) ? AMPERSAND : NOT_FOUND_SYMBOL;
 }
 
 std::string HTMLDecode(std::string const& html)
 {
-	std::string resultStr;
-	std::string EncodedString;
-	bool comparisonStart = false;
+	std::string resultStr = "";
+	std::string EncodedString = "";
+	bool wasAnAmpersand = false;
 	char decodedSymbol;
 
 	for (const char ch : html)
 	{
 		if (ch == FIRST_SYMBOL_OF_ENCODED_HTML_SYMBOLS)
 		{
-			comparisonStart = true;
+			wasAnAmpersand = true;
 
 			if (!EncodedString.empty())
 			{
@@ -28,7 +33,7 @@ std::string HTMLDecode(std::string const& html)
 			}
 		}
 
-		if (comparisonStart)
+		if (wasAnAmpersand)
 		{
 			EncodedString += ch;
 		}
@@ -37,9 +42,9 @@ std::string HTMLDecode(std::string const& html)
 			resultStr += ch;
 		}
 
-		if (comparisonStart && (ch == LAST_SYMBOL_OF_ENCODED_HTML_SYMBOLS))
+		if (wasAnAmpersand && (ch == LAST_SYMBOL_OF_ENCODED_HTML_SYMBOLS))
 		{
-			comparisonStart = false;
+			wasAnAmpersand = false;
 
 			decodedSymbol = GetSymbolToHTMLEntity(EncodedString);
 
