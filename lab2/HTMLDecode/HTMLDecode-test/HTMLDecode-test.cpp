@@ -5,14 +5,14 @@
 
 TEST_CASE(" HTMLDecode - decoding html HTML entity ")
 {
-	//(empty_string
+	//empty_string
 	std::string emptyString;
 	std::string result = HTMLDecode(emptyString);
 	CHECK(result.empty());
 
 	//decode_quot
-	std::string quotEncode = "&quot;";
-	std::string quotDecode = "\"";
+	std::string quotEncode = "&quot&quot;";
+	std::string quotDecode = "&quot\"";
 	result = HTMLDecode(quotEncode);
 	CHECK(result == quotDecode);
 
