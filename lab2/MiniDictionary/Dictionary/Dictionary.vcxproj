@@ -151,11 +151,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Dictionary.cpp" />
+    <ClCompile Include="DictionaryCLI.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ParsingCommandLine.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DictionaryCLI.h" />
     <ClInclude Include="ParsingCommandLine.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
