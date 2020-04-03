@@ -1,6 +1,8 @@
 #include "GPN.h"
 #include <iostream>
 #include <string>
+#include <algorithm>
+#include <iterator>
 
 bool ReadNumberFromString(const std::string& number, unsigned int& num)
 {
@@ -30,10 +32,11 @@ int main(int argc, char* argv[])
 	{
 		auto nums = GeneratePrimeNumbersSet(num);
 
-		for (auto num : nums)
+		/*for (auto num : nums)
 		{
 			std::cout << num << std::endl;
-		}
+		}*/
+		std::copy(nums.begin(), nums.end(), std::ostream_iterator<int>(std::cout, "\n"));
 	}
 
 	return 0;

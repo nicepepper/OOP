@@ -11,7 +11,7 @@ TEST_CASE("GeneratePrimeNumbersSet - test case")
 	primes = GeneratePrimeNumbersSet(100000001);
 	CHECK(primes.size() == 0);*/
 
-	primes = GeneratePrimeNumbersSet(-1);
+	auto primes = GeneratePrimeNumbersSet(-1);
 	CHECK(primes.size() == 0);
 
 	primes = GeneratePrimeNumbersSet(10000);
