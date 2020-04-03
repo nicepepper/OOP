@@ -60,6 +60,5 @@ std::string HTMLDecode(std::string const& html)
 			EncodedString.clear();
 		}
 	}
-
 	return resultStr;
 }

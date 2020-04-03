@@ -32,6 +32,4 @@ TEST_CASE(" HTMLDecode - decoding html HTML entity ")
 	std::string apos = "&amp;&amp;&amp;&amp;&amp;&amp;&amp;";
 	result = HTMLDecode(apos);
 	CHECK(result == manyAmp);
-
-	str::string man;
 }

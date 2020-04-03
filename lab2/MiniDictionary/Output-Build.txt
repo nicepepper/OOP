@@ -1,0 +1,15 @@
+﻿1>------ Rebuild All started: Project: Dictionary-test, Configuration: Release x64 ------
+1>DictionaryCLI.cpp
+1>Dictionary-test.cpp
+1>Generating code
+1>Previous IPDB not found, fall back to full compilation.
+1>All 5786 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+1>Finished generating code
+1>Dictionary-test.vcxproj -> C:\IPS-2020\labs\oop\lab2\MiniDictionary\x64\Release\Dictionary-test.exe
+1>The word "cat" is stored in the dictionary as "ъю°ър".
+1>The word "cat" is stored in the dictionary as "ъюЄ".
+1>The word "The Red Square" is stored in the dictionary as "╩Ёрёэр  ╧ыю∙рф№".
+1>===============================================================================
+1>All tests passed (1 assertion in 1 test case)
+1>
+========== Rebuild All: 1 succeeded, 0 failed, 0 skipped ==========

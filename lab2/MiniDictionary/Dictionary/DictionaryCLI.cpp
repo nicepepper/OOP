@@ -86,10 +86,12 @@ void FindWordTranslation(const std::string& wordStr, const std::multimap<std::st
 	{
 		translationsStr.append(it->second + " ");
 	}
+	Trim(translationsStr);
 }
 
 void FindWordByTranslation(const std::string& translationStr, const std::multimap<std::string, std::string>& Dictionary, std::string& wordStr)
 {
+	wordStr.clear();
 	std::string lowercaseTranslation = translationStr;
 	std::transform(lowercaseTranslation.begin(), lowercaseTranslation.end(), lowercaseTranslation.begin(), tolower);
 	auto equalValues = [&](const std::pair<std::string, std::string> pair) {
@@ -98,7 +100,7 @@ void FindWordByTranslation(const std::string& translationStr, const std::multima
 	wordStr = std::find_if(Dictionary.begin(), Dictionary.end(), equalValues)->first;
 }
 
-void FindInDictionary(const std::string& inputStr, std::multimap<std::string, std::string>& Dictionary, std::string& outputStr)
+void FindWordInDictionary(const std::string& inputStr, const std::multimap<std::string, std::string>& Dictionary, std::string& outputStr)
 {
 	if (IsLineInEnglish(inputStr))
 	{
@@ -124,27 +126,27 @@ void InputStreamToString(std::istream& in, std::string& str)
 
 void AddNewWordAndTranslationToDictionary(const std::string& word, const std::string& translation, std::multimap<std::string, std::string>& Dictionary)
 {
-	std::string lowercaseWord = word;
-	std::string lowercaseTranslation = translation;
-	std::transform(lowercaseWord.begin(), lowercaseWord.end(), lowercaseWord.begin(), tolower);
-	std::transform(lowercaseTranslation.begin(), lowercaseTranslation.end(), lowercaseTranslation.begin(), tolower);
-	Dictionary.emplace(lowercaseWord, lowercaseTranslation);
+	Dictionary.emplace(word, translation);
 	std::cout << "The word \"" << word << "\" is stored in the dictionary as \"" << translation << "\"." << std::endl;
 }
 
-void AddToDictionary(const std::string& word, const std::string& translation, std::multimap<std::string, std::string>& Dictionary)
+void AddNewWordToDictionary(const std::string& word, const std::string& translation, std::multimap<std::string, std::string>& Dictionary)
 {
-	if (IsLineInEnglish(word))
+	if (!word.empty() && !translation.empty())
 	{
-		AddNewWordAndTranslationToDictionary(word, translation, Dictionary);
+		if (IsLineInEnglish(word))
+		{
+			AddNewWordAndTranslationToDictionary(word, translation, Dictionary);
+		}
+		else
+		{
+			AddNewWordAndTranslationToDictionary(translation, word, Dictionary);
+		}
 	}
-	else
-	{
-		AddNewWordAndTranslationToDictionary(translation, word, Dictionary);
-	}
+	
 }
 
-void HandleAddingToDictionary(const std::string word, std::multimap<std::string, std::string>& Dictionary)
+void HandleAddingWordToDictionary(const std::string word, std::multimap<std::string, std::string>& Dictionary)
 {
 	std::string translation;
 	std::cout << "Unknown word \"" << word << "\". Enter a translation or blank line to refuse." << std::endl;
@@ -154,7 +156,7 @@ void HandleAddingToDictionary(const std::string word, std::multimap<std::string,
 		std::cout << "The word \"" << word << "\" is ignored." << std::endl;
 		return;
 	}
-	AddToDictionary(word, translation, Dictionary);
+	AddNewWordToDictionary(word, translation, Dictionary);
 }
 
 void ProcessDictionary(std::multimap<std::string, std::string>& Dictionary)
@@ -173,7 +175,7 @@ void ProcessDictionary(std::multimap<std::string, std::string>& Dictionary)
 
 		if (inputString != DIALOG_EXIT_KEY)
 		{
-			FindInDictionary(inputString, Dictionary, outputString);
+			FindWordInDictionary(inputString, Dictionary, outputString);
 			if (!outputString.empty())
 			{
 				OutputStringToStream(outputString, std::cout);
@@ -181,7 +183,7 @@ void ProcessDictionary(std::multimap<std::string, std::string>& Dictionary)
 			}
 			else
 			{
-				HandleAddingToDictionary(inputString, Dictionary);
+				HandleAddingWordToDictionary(inputString, Dictionary);
 				continue;
 			}
 		}
@@ -233,7 +235,8 @@ void HandleDictionarySaving(const std::multimap<std::string, std::string>& Dicti
 void PrintDictionaryInformation()
 {
 	std::cout << "Hello !This is an English - Russian and Russian - English dictionary.\n"
-			  << "Enter the word you want to translate." << std::endl;
+			  << "Enter the word you want to translate.\n"
+			  << "If you want to exit, enter << ... >> (a line consisting of three dots)" << std::endl;
 }
 
 void PrintExitInformation()
