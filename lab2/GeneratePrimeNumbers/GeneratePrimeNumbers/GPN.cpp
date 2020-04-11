@@ -1,11 +1,11 @@
 #include "GPN.h"
 #include <vector>
 
-const unsigned int MAX_UPPER_BOUND = 100000000;
+constexpr unsigned int MAX_UPPER_BOUND = 100000000;
 
 std::vector<bool> GenerateVectorOfPrimes(unsigned int upperBound)
 {
-	std::vector<bool> prime(upperBound + 1, true);
+	std::vector<bool> prime(1 + upperBound, true);
 
 	prime[0] = prime[1] = false;
 

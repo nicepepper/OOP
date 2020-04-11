@@ -1,8 +1,9 @@
 #include "GPN.h"
-#include <iostream>
-#include <string>
 #include <algorithm>
+#include <boost/timer.hpp>
+#include <iostream>
 #include <iterator>
+#include <string>
 
 bool ReadNumberFromString(const std::string& number, unsigned int& num)
 {
@@ -30,14 +31,14 @@ int main(int argc, char* argv[])
 
 	if (ReadNumberFromString(argv[1], num))
 	{
+		boost::timer t;
+		t.restart();
 		auto nums = GeneratePrimeNumbersSet(num);
-
-		/*for (auto num : nums)
-		{
-			std::cout << num << std::endl;
-		}*/
+		double duration = t.elapsed();
+		std::cout << "The time to build a set of primes in the range from 1 to " << argv[1] << " : " << duration << "sec.\n"
+				  << "Please press any key to display prime numbers";
+		getchar();
 		std::copy(nums.begin(), nums.end(), std::ostream_iterator<int>(std::cout, "\n"));
 	}
-
 	return 0;
 }

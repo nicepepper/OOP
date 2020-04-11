@@ -5,15 +5,18 @@
 
 TEST_CASE("GeneratePrimeNumbersSet - test case")
 {
-	/*auto primes = GeneratePrimeNumbersSet(100000000);
+	auto primes = GeneratePrimeNumbersSet(100000000);
 	CHECK(primes.size() == 5761455);
 
 	primes = GeneratePrimeNumbersSet(100000001);
-	CHECK(primes.size() == 0);*/
+	CHECK(primes.size() == 0);
 
-	auto primes = GeneratePrimeNumbersSet(-1);
+	primes = GeneratePrimeNumbersSet(-1);
 	CHECK(primes.size() == 0);
 
 	primes = GeneratePrimeNumbersSet(10000);
 	CHECK(primes.size() == 1229);
+
+	primes = GeneratePrimeNumbersSet(0);
+	CHECK(primes.size() == 0);
 }
