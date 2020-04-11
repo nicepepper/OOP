@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
 		auto nums = GeneratePrimeNumbersSet(num);
 		double duration = t.elapsed();
 		std::cout << "The time to build a set of primes in the range from 1 to " << argv[1] << " : " << duration << "sec.\n"
-				  << "Please press any key to display prime numbers";
+				  << "Please press Enter to display prime numbers." << std::endl;
 		getchar();
 		std::copy(nums.begin(), nums.end(), std::ostream_iterator<int>(std::cout, "\n"));
 	}
