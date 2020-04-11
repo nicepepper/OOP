@@ -26,8 +26,5 @@
     <ClInclude Include="HTMLDecodeFunction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HTMLSpecialSymbols.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

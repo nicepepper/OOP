@@ -1,64 +1,87 @@
 #include "HTMLDecodeFunction.h"
-#include <vector>
 
-constexpr char NOT_FOUND_SYMBOL = '\n';
+constexpr char FIRST_SYMBOL_OF_ENCODED_HTML_SYMBOLS = '&';
+constexpr char LAST_SYMBOL_OF_ENCODED_HTML_SYMBOLS = ';';
 
-char GetSymbolToHTMLEntity(const std::string& str)
+const std::vector<std::pair<std::string, char>> HTML_ENTITIES{
+	{ "&apos;", '\'' },
+	{ "&quot;", '\"' },
+	{ "&lt;", '<' },
+	{ "&gt;", '>' },
+	{ "&amp;", '&' }
+};
+
+char GetSymbolHTMLEntities(const std::string& entityHTML)
 {
-	return 
-		(str == APOSTROPHE_ENCODED) ? APOSTROPHE : 
-		(str == QUATATION_MARK_ENCODED) ? QUATATION_MARK : 
-		(str == LESS_THAN_SIGN_ENCODED) ? LESS_THAN_SIGN : 
-		(str == GREATER_THAN_SIGN_ENCODED) ? GREATER_THAN_SIGN : 
-		(str == AMPERSAND_ENCODED) ? AMPERSAND : NOT_FOUND_SYMBOL;
+	auto it = std::find_if(HTML_ENTITIES.begin(), HTML_ENTITIES.end(),
+		[&entityHTML](const std::pair<std::string, char>& element) { return element.first == entityHTML; });
+	if (it == HTML_ENTITIES.end())
+	{
+		return '0';
+	}
+	return it->second;
 }
 
-std::string HTMLDecode(std::string const& html)
+std::string FindHTMLEntityInSubstring(const std::string& html, const size_t itPosStart, const size_t itposEnd)
 {
-	std::string resultStr = "";
-	std::string EncodedString = "";
-	bool wasAnAmpersand = false;
-	char decodedSymbol;
-
-	for (const char ch : html)
+	std::string subStr = html.substr(itPosStart, itposEnd - itPosStart + 1);
+	auto it = std::find_if(HTML_ENTITIES.begin(), HTML_ENTITIES.end(),
+		[&subStr](const std::pair<std::string, char>& element) { return element.first == subStr; });
+	if (it == HTML_ENTITIES.end())
 	{
-		if (ch == FIRST_SYMBOL_OF_ENCODED_HTML_SYMBOLS)
-		{
-			wasAnAmpersand = true;
+		return "";
+	}
+	return it->first;
+}
 
-			if (!EncodedString.empty())
+void DiscardFlags(bool& isFoundStartSymbol, bool& isFoundEndSymbol)
+{
+	isFoundStartSymbol = false;
+	isFoundEndSymbol = false;
+}
+
+std::string HTMLDecode(std::string& html)
+{
+	bool isFoundStartSymbol = false;
+	bool isFoundEndSymbol = false;
+	size_t itPosStart = 0;
+	size_t itPosEnd = 0;
+	for (auto it = html.begin(); it != html.end(); ++it)
+	{
+		if (*it == FIRST_SYMBOL_OF_ENCODED_HTML_SYMBOLS)
+		{
+			isFoundStartSymbol = true;
+			itPosStart = it - html.begin();
+		}
+
+		if (*it == LAST_SYMBOL_OF_ENCODED_HTML_SYMBOLS)
+		{
+			isFoundEndSymbol = true;
+			itPosEnd = it - html.begin();
+		}
+
+		if (isFoundStartSymbol && isFoundEndSymbol)
+		{
+			if (itPosStart > itPosEnd)
 			{
-				resultStr += EncodedString;
-				EncodedString.clear();
-			}
-		}
-
-		if (wasAnAmpersand)
-		{
-			EncodedString += ch;
-		}
-		else
-		{
-			resultStr += ch;
-		}
-
-		if (wasAnAmpersand && (ch == LAST_SYMBOL_OF_ENCODED_HTML_SYMBOLS))
-		{
-			wasAnAmpersand = false;
-
-			decodedSymbol = GetSymbolToHTMLEntity(EncodedString);
-
-			if (decodedSymbol != NOT_FOUND_SYMBOL)
-			{
-				resultStr += decodedSymbol;
+				DiscardFlags(isFoundStartSymbol, isFoundEndSymbol);
 			}
 			else
 			{
-				resultStr += EncodedString;
+				auto entityHTML = FindHTMLEntityInSubstring(html, itPosStart, itPosEnd);
+				if (!entityHTML.empty())
+				{
+					std::cout << html.substr(itPosStart + 1, itPosEnd - itPosStart + 1);
+					//html.erase(itPosStart + 1, itPosEnd - itPosStart + 1);
+					//html.at(itPosStart) = GetSymbolHTMLEntities(entityHTML);
+					//DiscardFlags(isFoundStartSymbol, isFoundEndSymbol);
+				}
+				else
+				{
+					DiscardFlags(isFoundStartSymbol, isFoundEndSymbol);
+				}
 			}
-
-			EncodedString.clear();
 		}
 	}
-	return resultStr;
+	return html;
 }
