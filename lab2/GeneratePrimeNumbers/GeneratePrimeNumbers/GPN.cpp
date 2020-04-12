@@ -5,7 +5,7 @@ constexpr unsigned int MAX_UPPER_BOUND = 100000000;
 
 std::vector<bool> GenerateVectorOfPrimes(unsigned int upperBound)
 {
-	std::vector<bool> prime(1 + upperBound, true);
+	std::vector<bool> prime(size_t(1 + upperBound), true);
 
 	prime[0] = prime[1] = false;
 
