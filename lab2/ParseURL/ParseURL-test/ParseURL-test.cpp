@@ -1,9 +1,73 @@
-// ParseURL-test.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+#define CATCH_CONFIG_MAIN // This tells Catch to provide a main() - only do this in one cpp file
+#include "../catch2/catch.hpp"
 
-#include <iostream>
+#include "ParseURL/ParseURL.h"
 
-int main()
+TEST_CASE("ParseURL - test")
 {
-    std::cout << "Hello World!\n";
+	SECTION("mysite_test - http")
+	{
+		const std::string url = "http://www.mysite.com/docs/document1.html?page=30&lang=en#title";
+		std::string host, document;
+		int port;
+		Protocol protocol;
+		bool success = ParseURL(url, protocol, port, host, document);
+		CHECK(success);
+		CHECK(protocol == Protocol::HTTP);
+		CHECK(host == "www.mysite.com");
+		CHECK(port == 80);
+		CHECK(document == "docs/document1.html?page=30&lang=en#title");
+	}
+
+	SECTION("https - 443")
+	{
+		const std::string url = "https://www.stackoverflow.com/questions/27745/getting-parts-of-a-url-regex";
+		std::string host, document;
+		int port;
+		Protocol protocol;
+		bool success = ParseURL(url, protocol, port, host, document);
+		CHECK(success);
+		CHECK(protocol == Protocol::HTTPS);
+		CHECK(host == "www.stackoverflow.com");
+		CHECK(port == 443);
+		CHECK(document == "questions/27745/getting-parts-of-a-url-regex");
+	}
+
+	SECTION("ftp - 21")
+	{
+		const std::string url = "FTP://www.onedrive.live.com";
+		std::string host, document;
+		int port;
+		Protocol protocol;
+		bool success = ParseURL(url, protocol, port, host, document);
+		CHECK(success);
+		CHECK(protocol == Protocol::FTP);
+		CHECK(host == "www.onedrive.live.com");
+		CHECK(port == 21);
+		CHECK(document == "");
+	}
+
+	SECTION("ftp - 2000")
+	{
+		const std::string url = "FTP://www.onedrive.live.com:2000/";
+		std::string host, document;
+		int port;
+		Protocol protocol;
+		bool success = ParseURL(url, protocol, port, host, document);
+		CHECK(success);
+		CHECK(protocol == Protocol::FTP);
+		CHECK(host == "www.onedrive.live.com");
+		CHECK(port == 2000);
+		CHECK(document == "");
+	}
+
+	SECTION("bad ww")
+	{
+		const std::string url = "FTP://ww.onedrive.live.com:2000/";
+		std::string host, document;
+		int port;
+		Protocol protocol;
+		bool success = ParseURL(url, protocol, port, host, document);
+		CHECK(!success);
+	}	
 }
