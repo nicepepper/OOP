@@ -4,4 +4,4 @@
 #include <string>
 #include <iostream>
 
-std::string HTMLDecode(std::string& html);
+std::string HTMLDecode(const std::string& html);
