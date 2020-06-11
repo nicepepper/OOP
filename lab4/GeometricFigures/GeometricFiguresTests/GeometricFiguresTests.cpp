@@ -251,7 +251,7 @@ BOOST_AUTO_TEST_SUITE(TestParseLineAndShapesModule)
 		std::vector<std::string> invalidLines = {
 			"rectangle 0 0 10 10 fff fffffffff",
 			"triangle aaa 0.321 10.123 10.123 10.123 10.0 fff aaa",
-			"circle0 0 150 ffffffff aaaffff",
+			"circle 0 0 150 ffffffff aaaffff",
 			"line 0 0 150 89 aaaffffaa",
 			"circle 1 0 150 #ffffffff #aaaffff",
 		};
