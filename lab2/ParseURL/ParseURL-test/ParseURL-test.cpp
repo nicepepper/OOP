@@ -3,8 +3,23 @@
 
 #include "ParseURL/ParseURL.h"
 
+
 TEST_CASE("ParseURL - test")
 {
+	SECTION("test - https://google.com/")
+	{
+		const std::string url = "https://google.com/";
+		std::string host, document;
+		int port;
+		Protocol protocol;
+		bool success = ParseURL(url, protocol, port, host, document);
+		CHECK(success);
+		CHECK(protocol == Protocol::HTTPS);
+		CHECK(host == "google.com");
+		CHECK(port == 443);
+		CHECK(document == "");
+	}
+
 	SECTION("mysite_test - http")
 	{
 		const std::string url = "http://www.mysite.com/docs/document1.html?page=30&lang=en#title";
@@ -60,14 +75,4 @@ TEST_CASE("ParseURL - test")
 		CHECK(port == 2000);
 		CHECK(document == "");
 	}
-
-	SECTION("bad ww")
-	{
-		const std::string url = "FTP://ww.onedrive.live.com:2000/";
-		std::string host, document;
-		int port;
-		Protocol protocol;
-		bool success = ParseURL(url, protocol, port, host, document);
-		CHECK(!success);
-	}	
 }

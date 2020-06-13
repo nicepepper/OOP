@@ -4,7 +4,7 @@
 #include "ParseURL.h"
 #include <iostream>
 
-int main()
+int main() // Напишите критерии, или укажите где вазять информацию по url. Не знал что брать, читал про (RFC 3986) и видел регулярку, но не стал испоьзовать
 {
 	Protocol protocol;
 	int port;

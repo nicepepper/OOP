@@ -1,6 +1,6 @@
 #include "ParseURL.h"
 
-const std::string PATTERN = R"(^(http|https|ftp):\/\/(www\..*?\.\w+)(?:\:(\d+))?(?:\/(\S*))?$)";
+const std::string PATTERN = R"(^(http[s]?|ftp):\/\/([A-Za-z0-9\-\.]+)(?:\:(\d+))?(?:\/(\S*))?$)";
 
 std::string WordToLowerCase(const std::string& word)
 {
