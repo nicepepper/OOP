@@ -1,8 +1,6 @@
 #include "Vector3D.h"
 #include <cfloat>
 #include <cmath>
-#include <stdexcept>
-#include <valarray>
 
 CVector3D::CVector3D()
 	: x(0)
