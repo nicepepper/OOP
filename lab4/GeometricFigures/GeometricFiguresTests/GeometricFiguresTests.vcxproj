@@ -214,9 +214,6 @@
     <ClInclude Include="..\GeometricFigures\Uint32ToHex.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="GeometricFiguresTests.rc" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\packages\sfml_graphics.redist.2.5.1\build\native\sfml_graphics.redist.targets" Condition="Exists('..\packages\sfml_graphics.redist.2.5.1\build\native\sfml_graphics.redist.targets')" />
