@@ -72,7 +72,7 @@ void CCanvas::DrawLine(const CPoint& from, const CPoint& to, uint32_t lineColor)
 	}
 }
 
-void CCanvas::FillPolygon(std::vector<CPoint>& points, uint32_t fillColor)
+void CCanvas::FillPolygon(const std::vector<CPoint>& points, uint32_t fillColor)
 {
 	if (m_window.isOpen())
 	{

@@ -1,0 +1,5 @@
+rectangle 0 0 800 400 1e90ffff 1e90ffff
+rectangle 0 400 800 600 ff9900ff ff9900ff
+circle 400 100 70 ffff00ff ffff00ff
+triangle 300 400 350 300 400 400 660033ff cc6600ff
+triangle 350 400 400 300 450 400 660033ff cc6600ff

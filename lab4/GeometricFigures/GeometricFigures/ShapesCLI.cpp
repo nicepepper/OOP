@@ -16,11 +16,8 @@ void PrintResults(std::vector<std::shared_ptr<IShape>>& shapes, std::ostream& ou
 	}
 
 	double maxArea = 0;
-
 	double minPerimeter = std::numeric_limits<double>::max();
-
 	std::shared_ptr<IShape> maxAreaShape, minPerimeterShape;
-
 	std::for_each(shapes.begin(), shapes.end(), [&](std::shared_ptr<IShape>& pointer) {
 		if (pointer->GetArea() >= maxArea)
 		{

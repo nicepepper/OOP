@@ -16,18 +16,15 @@ BOOST_AUTO_TEST_SUITE(Circle)
 	BOOST_AUTO_TEST_CASE(CheckCirclePerimeterAndArea)
 	{
 		CPoint point(100, 100);
-
 		CCircle circle(0, 0, point, 35.55f);
 
 		BOOST_TEST(circle.GetArea() == 3970.3526, tt::tolerance(0.001));
-
 		BOOST_TEST(circle.GetPerimeter() == 223.3672, tt::tolerance(0.001));
 	}
 
 	BOOST_AUTO_TEST_CASE(CircleReturnsHisRadius)
 	{
 		CPoint point(100, 100);
-
 		CCircle circle(0, 0, point, 35.55f);
 
 		BOOST_CHECK_EQUAL(circle.GetRadius(), 35.55f);
@@ -36,7 +33,6 @@ BOOST_AUTO_TEST_SUITE(Circle)
 	BOOST_AUTO_TEST_CASE(CircleReturnsHisCenter)
 	{
 		CPoint point(100, 100);
-
 		CCircle circle(0, 0, point, 35.55f);
 
 		BOOST_CHECK(CheckPointEqual(point, circle.GetCenter()));
@@ -52,7 +48,6 @@ BOOST_AUTO_TEST_SUITE(Circle)
 	BOOST_AUTO_TEST_CASE(CheckCircleToStringMethod)
 	{
 		CPoint point(100, 100);
-
 		CCircle circle(0, 0, point, 35.55f);
 
 		BOOST_CHECK(circle.ToString() == "circle 100.00 100.00 35.55 0 0");
@@ -166,7 +161,6 @@ BOOST_AUTO_TEST_SUITE(Rectangle)
 		CRectangle rect(0, 0, p1, p2);
 
 		BOOST_CHECK_EQUAL(rect.GetWidth(), 300);
-
 		BOOST_CHECK_EQUAL(rect.GetHeight(), 300);
 	}
 
@@ -177,7 +171,6 @@ BOOST_AUTO_TEST_SUITE(Rectangle)
 		CRectangle rect(0, 0, p1, p2);
 
 		BOOST_CHECK_EQUAL(rect.GetWidth(), 300);
-
 		BOOST_CHECK_EQUAL(rect.GetHeight(), 300);
 	}
 

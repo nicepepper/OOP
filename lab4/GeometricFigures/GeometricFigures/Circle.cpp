@@ -6,7 +6,7 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
-CCircle::CCircle(const uint32_t outlineColor, const uint32_t fillColor, CPoint& center, const float radius)
+CCircle::CCircle(const uint32_t outlineColor, const uint32_t fillColor,const CPoint& center, const float radius)
 	: m_center(center)
 	, m_radius(radius)
 	, m_outlineColor(outlineColor)
